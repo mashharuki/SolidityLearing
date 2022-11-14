@@ -1,0 +1,2 @@
+# SolidityLearing
+Solidityの細かい仕様まで学習するためのリポジトリ
