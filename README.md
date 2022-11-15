@@ -49,4 +49,4 @@ solidityでinline assemblyを使うメリットとして以下が挙げられる
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)
 3. [Solidity Inline Assembly で気になったことをまとめる](https://blog.suishow.net/2021/08/25/solidity-inline-assembly-%E6%B3%A8%E7%9B%AE%E3%81%99%E3%82%8B%E3%81%A8%E3%81%93%E3%82%8D-%F0%9F%99%83/)
-4. []()
+4. [Solidityのストレージスロットとパッキングについて](https://qiita.com/takayukib/items/8647302c4dee028adcca)
