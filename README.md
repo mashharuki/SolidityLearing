@@ -49,6 +49,18 @@ solidityでinline assemblyを使うメリットとして以下が挙げられる
 Contracts can be deleted from the blockchain by calling selfdestruct.   
 selfdestruct sends all remaining Ether stored in the contract to a designated address.
 
+### SolidityのSlot
+
+solidityでは、32バイトのデータを1スロットとして考える。
+
+#### delegateCallを実行する場合の注意事項
+
+1. delegatecall preserves context (storage, caller, etc...)
+2. s2torage layout must be the same for the contract calling delegatecall and the contract getting called
+
+#### blockhashとblock.timestampのランダム性
+
+blockhashとblock.timestampはランダム性を確保するための信頼できるソースではありません。
 
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
