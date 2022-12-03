@@ -91,6 +91,15 @@ block.timestampについては、任意に操作できてしまう可能性が�
 keccak256(abi.encodePacked(address(this), _to, _amount, _nonce));
 ```
 
+#### Vaultとは
+
+DeFiプロトコルで使用される資金用の保管庫のこと。  
+ユーザーが入金すると、ある程度の量のシェアがミントされる。DeFiプロトコルは、ユーザーの預金を利用して（何らかの形で）利回りを発生させる。ユーザーは、自分のトークン＋利回りを引き出す。
+
+#### Constant product AMM 
+
+Constant product AMM XY = K
+
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)
@@ -100,3 +109,6 @@ keccak256(abi.encodePacked(address(this), _to, _amount, _nonce));
 6. [ChainIDE](https://chainide.com/s/bnbchain/a7a1bba09b194f5b94eb434992121252)
 7. [How do I make my DAPP "Serenity-Proof?" ](https://ethereum.stackexchange.com/questions/196/how-do-i-make-my-dapp-serenity-proof)
 8. [【Solidity】tx.originとmsg.senderの違い](https://qiita.com/Kumamera/items/a81de80a56340076e254)
+9. [forge-std](https://github.com/foundry-rs/forge-std)
+10. [foundry-rs/foundry](https://github.com/foundry-rs/foundry)
+11. [UniswapV3](https://docs.uniswap.org/contracts/v3/guides/providing-liquidity/setting-up)
