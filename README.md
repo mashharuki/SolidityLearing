@@ -53,6 +53,12 @@ selfdestruct sends all remaining Ether stored in the contract to a designated ad
 
 solidityでは、32バイトのデータを1スロットとして考える。
 
+### delegateCallについて
+
+Delegatecallとは、外部コントラクトへの呼び出しに対して呼び出し元のコントラクトの文脈で処理する関数です。ここで言う「コントラクトの文脈」とは、msg.senderやmsg.value、コントラクトのストレージのことなどを指しています。   
+
+delegatecallの場合は外部コントラクトの関数を自身のコントラクトのストレージ文脈で処理することが可能になります。
+
 #### delegateCallを実行する場合の注意事項
 
 1. delegatecall preserves context (storage, caller, etc...)
@@ -100,6 +106,43 @@ DeFiプロトコルで使用される資金用の保管庫のこと。
 
 Constant product AMM XY = K
 
+#### Proxyコントラクトとは
+
+ユーザーのトランザクション送信をUpgradableコントラクトへ届ける役割のコントラクトのこと。つまりdelegatecall関数を実行するコントラクトとなる。Proxyコントラクトにはfallback関数にdelegate関数を実装している。この仕組みを上手く利用することでProxyコントラクトに記述されていない関数はfallback関数に定義されている処理を実行する形となる。  
+
+実装例は下記の通り。  
+delegatecallの引数の内容は下記の通り
+
+- gas：この呼び出しのために与えるgas量です。gas opcodeは処理のために利用可能なgas量を返します。
+- _impl：delegatecall先のコントラクトアドレス
+- ptr：上で定義したメモリポインタ。calldataを適用するため。
+- calldatasize：msg.data.lengthと同じのデータサイズ
+- 0：delegatecall先コントラクトの関数から返される出力データ。現時点ではこのデータは分からないので使わない。
+- 0：出力データのサイズ。これ以降、returndetasize opcodeで使用することができる。
+
+```sol
+function () payable public {
+    address _impl = implementation();
+    require(_impl != address(0));
+ 
+    assembly {
+      let ptr := mload(0x40)  // フリーメモリポインタ
+      calldatacopy(ptr, 0, calldatasize) // calldataをコピーする処理 （msg.data.lengthと同じです）
+      let result := delegatecall(gas, _impl, ptr, calldatasize, 0, 0)  // delegatecall opcodeの操作
+      let size := returndatasize
+      returndatacopy(ptr, 0, size)
+ 
+      switch result //  成功したら1 失敗したら0が格納される
+      case 0 { revert(ptr, size) }
+      default { return(ptr, size) }
+    }
+}
+```
+#### MasterChef Contractとは
+
+Dexにおける流動性提供をしたときに取得できる LP-Token を Stake することで得られる収益を計算するためのスマートコントラクトのこと。
+
+
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)
@@ -112,3 +155,7 @@ Constant product AMM XY = K
 9. [forge-std](https://github.com/foundry-rs/forge-std)
 10. [foundry-rs/foundry](https://github.com/foundry-rs/foundry)
 11. [UniswapV3](https://docs.uniswap.org/contracts/v3/guides/providing-liquidity/setting-up)
+12. [Weird ERC20](https://unchain-shiftbase.notion.site/Weird-ERC20-176738db69a14dbaaf189eb85212a28c)
+13. [アップグレード可能なスマートコントラクトを実現する具体的なアプローチ](https://zoom-blc.com/how-to-develop-upgradable-contracts)
+14. [pancake-farm](https://github.com/pancakeswap/pancake-farm/blob/master/contracts/MasterChef.sol)
+15. [【UNCHAIN-dev】openzeppelin-deepdive](https://github.com/unchain-dev/openzeppelin-deepdive/tree/main/bugs)
