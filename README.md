@@ -142,7 +142,6 @@ function () payable public {
 
 Dexにおける流動性提供をしたときに取得できる LP-Token を Stake することで得られる収益を計算するためのスマートコントラクトのこと。
 
-
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)
@@ -159,3 +158,7 @@ Dexにおける流動性提供をしたときに取得できる LP-Token を Sta
 13. [アップグレード可能なスマートコントラクトを実現する具体的なアプローチ](https://zoom-blc.com/how-to-develop-upgradable-contracts)
 14. [pancake-farm](https://github.com/pancakeswap/pancake-farm/blob/master/contracts/MasterChef.sol)
 15. [【UNCHAIN-dev】openzeppelin-deepdive](https://github.com/unchain-dev/openzeppelin-deepdive/tree/main/bugs)
+16. [Foundry book](https://book.getfoundry.sh/projects/project-layout)
+17. [BBB 資料](https://unchain-shiftbase.notion.site/Day-1-12-7-833514e490e343098b1df87f85dca1f9)
+18. [How to become a smart contract auditor](https://cmichel.io/how-to-become-a-smart-contract-auditor/)
+19. [【sherlock】GMX contest ](https://app.sherlock.xyz/audits/contests/6)
