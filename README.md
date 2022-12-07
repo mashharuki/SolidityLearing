@@ -142,6 +142,14 @@ function () payable public {
 
 Dexにおける流動性提供をしたときに取得できる LP-Token を Stake することで得られる収益を計算するためのスマートコントラクトのこと。
 
+#### unchecked
+
+ガス代を安くする上で使えるのが`unchecked`である。
+
+#### selfdestructとは
+
+コントラクトを壊すメソッド。コントラクトを破棄した呼び出し元にコントラクトが所持していたEtherを全て送金することができる。
+
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)
@@ -162,3 +170,6 @@ Dexにおける流動性提供をしたときに取得できる LP-Token を Sta
 17. [BBB 資料](https://unchain-shiftbase.notion.site/Day-1-12-7-833514e490e343098b1df87f85dca1f9)
 18. [How to become a smart contract auditor](https://cmichel.io/how-to-become-a-smart-contract-auditor/)
 19. [【sherlock】GMX contest ](https://app.sherlock.xyz/audits/contests/6)
+20. [【Secureum】Audit Findings 101](https://secureum.substack.com/p/audit-findings-101)
+21. [イーサの送金とリエントランシー攻撃](https://nawoo.hateblo.jp/entry/2021/09/19/120558)
+22. [Reentrancy | Hack Solidity #1](https://coinsbench.com/reentrancy-hack-solidity-1-aad0154a3a6b)

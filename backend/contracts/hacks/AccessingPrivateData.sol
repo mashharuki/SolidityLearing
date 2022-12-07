@@ -7,6 +7,12 @@ Note: browser Web3 is old so use Web3 from truffle console
 
 Contract deployed on Goerli
 0x534E4Ce0ffF779513793cfd70308AF195827BD31
+
+それぞれのスロットには32バイト格納できる。
+2^256スロット持てる
+Web3のメソッドを利用すればたとえprivate修飾子をつけていても見れてしまう。
+
+mapとArrayも1つのスロットになる。
 */
 
 /*
