@@ -34,7 +34,7 @@ solidiyでは32byteを1つの区切りとして認識する。
 
 ### mload()とは
 
-引数にした変数の長さをも求めるメソッド
+引数にした変数の長さを求めるメソッド
 
 ### inline assemblyを使う意味
 
@@ -173,3 +173,4 @@ Dexにおける流動性提供をしたときに取得できる LP-Token を Sta
 20. [【Secureum】Audit Findings 101](https://secureum.substack.com/p/audit-findings-101)
 21. [イーサの送金とリエントランシー攻撃](https://nawoo.hateblo.jp/entry/2021/09/19/120558)
 22. [Reentrancy | Hack Solidity #1](https://coinsbench.com/reentrancy-hack-solidity-1-aad0154a3a6b)
+23. [日本円ハッカソン入門ラボ](https://docs.google.com/presentation/d/e/2PACX-1vRj3P5niG9AYm6Nl6aA0-SAmHgPpZVqYDGrRkkCqJC0a9vcyWCaHyTZSjbZ0LfKfdeimosEStPEJrbz/pub?start=false&loop=false&delayms=3000&slide=id.g11548f0dd74_2_165)
