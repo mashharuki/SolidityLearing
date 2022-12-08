@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-08T11:11:04.834Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="NGOafyZTESIFkPbCPNFw" version="20.5.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-08T11:12:36.607Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="qwNxytMEb9vWxfr_m_Fv" version="20.5.1" type="github">
   <diagram id="t9sUDgmY1rG62_aLtfS_" name="ページ1">
     <mxGraphModel dx="2066" dy="1190" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -43,8 +43,11 @@
         <mxCell id="2NuNlHKh36lMKqr2MWiC-13" value="delegatecall()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="317" y="524" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2NuNlHKh36lMKqr2MWiC-14" value="&lt;b&gt;変更される値 1&amp;nbsp;&lt;br&gt;&lt;br&gt;　proxyコントラクトに登録されている　　&lt;br&gt;　logicコントラクトのアドレス&lt;br&gt;&lt;br&gt;変更される値2&lt;br&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; proxyコントラクト内で保持している変数&lt;br&gt;&lt;/b&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;fillColor=#e1d5e7;strokeColor=#9673a6;position2=0.7;align=left;" vertex="1" parent="1">
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-14" value="&lt;b&gt;変更される値 1&amp;nbsp;&lt;br&gt;&lt;br&gt;　proxyコントラクトに登録されている　　&lt;br&gt;　logicコントラクトのアドレス&lt;br&gt;&lt;br&gt;変更される値 2&lt;br&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; proxyコントラクト内で保持している変数&lt;br&gt;&lt;/b&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;fillColor=#e1d5e7;strokeColor=#9673a6;position2=0.7;align=left;" vertex="1" parent="1">
           <mxGeometry x="33" y="255" width="270" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-15" value="Delegatacallのイメージ図" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="10" y="130" width="270" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
