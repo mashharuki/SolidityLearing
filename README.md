@@ -150,6 +150,46 @@ Dexにおける流動性提供をしたときに取得できる LP-Token を Sta
 
 コントラクトを壊すメソッド。コントラクトを破棄した呼び出し元にコントラクトが所持していたEtherを全て送金することができる。
 
+#### calldataついて
+
+EVM(Ethereum Virtual Machine)でコードを実行する際にstack、memory、storage、calldata、returndataの５つのデータ領域がある。
+calldataはcallまたはdelegatecallで別のコントラクトを呼び出す時に使用するデータ領域で、calldataはbytes型で表される。  
+
+calldataは2つのサブパートに分けることができる。
+
+- メソッドID（4バイト）
+- 引数（32バイト）※引数が複数ある場合もある
+
+最終的なcalldataはこの2つを連結させたもの。
+
+##### メソッドIDについて
+
+メソッドIDは、メソッドシグネチャのkecccak256ハッシュの先頭8文字で表される。
+メソッドシグネチャは、メソッドの名前とその引数の型のこと。
+
+```bash
+例 
+メソッドの名前  -->  transferFrom
+引数の型  -->  (address, address, uint256)
+メソッドシグネチャ  -->  transferFrom(address, address, uint256)
+kecccak256ハッシュの先頭8文字  -->  web3.abi.encodeFunctionSignature('transferFrom(address,address,uint256)')  -->  0x4a6e9f4e
+0x4a6e9f4eがメソッドIDとなる
+```
+
+##### 引数の場合について
+
+calldataの引数部分の求め方
+
+```bash
+例
+transferFrom(0x0123456789abcdef01223456789abcdef0123456, 0xabcdef0123456789abcdef0123456789abcdef01, 30)
+
+0x0123456789abcdef01223456789abcdef0123456を32バイトにする  -->  0x0000000000000000000000000123456789abcdef01223456789abcdef0123456
+0xabcdef0123456789abcdef0123456789abcdef01を32バイトにする  -->  0x000000000000000000000000abcdef0123456789abcdef0123456789abcdef01
+30を32バイトにする  -->  0x000000000000000000000000000000000000000000000000000000000000001d
+連結する  -->  0x0000000000000000000000000123456789abcdef01223456789abcdef0123456000000000000000000000000abcdef0123456789abcdef0123456789abcdef01000000000000000000000000000000000000000000000000000000000000001d
+```
+
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)
@@ -174,3 +214,6 @@ Dexにおける流動性提供をしたときに取得できる LP-Token を Sta
 21. [イーサの送金とリエントランシー攻撃](https://nawoo.hateblo.jp/entry/2021/09/19/120558)
 22. [Reentrancy | Hack Solidity #1](https://coinsbench.com/reentrancy-hack-solidity-1-aad0154a3a6b)
 23. [日本円ハッカソン入門ラボ](https://docs.google.com/presentation/d/e/2PACX-1vRj3P5niG9AYm6Nl6aA0-SAmHgPpZVqYDGrRkkCqJC0a9vcyWCaHyTZSjbZ0LfKfdeimosEStPEJrbz/pub?start=false&loop=false&delayms=3000&slide=id.g11548f0dd74_2_165)
+24. [[図解] delegatecall callcode call の違い](https://qiita.com/doskin/items/c4fd8952275c67deb594)
+25. [solidityのcalldataの求め方](https://qiita.com/oatnnimi/items/c303667043c90a5252c6)
+26. [スマートコントラクトを使った入金システムについて全力で理解してみた](https://tech.bitbank.cc/20201222/)
