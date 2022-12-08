@@ -1,20 +1,50 @@
-<mxfile host="app.diagrams.net" modified="2022-12-08T11:01:51.346Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="ynxcCD3eaAWJu3yhhffT" version="20.5.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-08T11:11:04.834Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="NGOafyZTESIFkPbCPNFw" version="20.5.1" type="github">
   <diagram id="t9sUDgmY1rG62_aLtfS_" name="ページ1">
     <mxGraphModel dx="2066" dy="1190" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2NuNlHKh36lMKqr2MWiC-1" value="ユーザー" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="80" y="430" width="30" height="60" as="geometry" />
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-1" value="&lt;b&gt;ユーザー&lt;/b&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="66" y="430" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="2NuNlHKh36lMKqr2MWiC-5" value="proxy&lt;br&gt;コントラクト" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="240" y="420" width="80" height="80" as="geometry" />
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-5" value="proxy&lt;br&gt;コントラクト" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="220" y="420" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="2NuNlHKh36lMKqr2MWiC-6" value="logic&lt;br&gt;コントラクト&lt;br&gt;(更新前)" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-6" value="logic&lt;br&gt;コントラクト&lt;br&gt;(更新前)" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
           <mxGeometry x="440" y="340" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="2NuNlHKh36lMKqr2MWiC-7" value="logic&lt;br&gt;コントラクト&lt;br&gt;(更新後)" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-7" value="logic&lt;br&gt;コントラクト&lt;br&gt;(更新後)" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="440" y="520" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="2NuNlHKh36lMKqr2MWiC-1" target="2NuNlHKh36lMKqr2MWiC-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="620" as="sourcePoint" />
+            <mxPoint x="440" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.013;entryY=0.606;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="2NuNlHKh36lMKqr2MWiC-5" target="2NuNlHKh36lMKqr2MWiC-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="459.5" as="sourcePoint" />
+            <mxPoint x="435" y="459.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-10" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2NuNlHKh36lMKqr2MWiC-5" target="2NuNlHKh36lMKqr2MWiC-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="470" as="sourcePoint" />
+            <mxPoint x="451.03999999999996" y="398.48" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-11" value="logic コントラクト&lt;br&gt;の呼び出し" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="110" y="420" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-12" value="delegatecall()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="319" y="380" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-13" value="delegatecall()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="317" y="524" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2NuNlHKh36lMKqr2MWiC-14" value="&lt;b&gt;変更される値 1&amp;nbsp;&lt;br&gt;&lt;br&gt;　proxyコントラクトに登録されている　　&lt;br&gt;　logicコントラクトのアドレス&lt;br&gt;&lt;br&gt;変更される値2&lt;br&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; proxyコントラクト内で保持している変数&lt;br&gt;&lt;/b&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;fillColor=#e1d5e7;strokeColor=#9673a6;position2=0.7;align=left;" vertex="1" parent="1">
+          <mxGeometry x="33" y="255" width="270" height="160" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
