@@ -218,3 +218,4 @@ transferFrom(0x0123456789abcdef01223456789abcdef0123456, 0xabcdef0123456789abcde
 25. [solidityのcalldataの求め方](https://qiita.com/oatnnimi/items/c303667043c90a5252c6)
 26. [スマートコントラクトを使った入金システムについて全力で理解してみた](https://tech.bitbank.cc/20201222/)
 27. [ERC-20と ERC-721の主な違い](https://info.huobi.co.jp/blog/what-is-erc20-and-erc721/)
+28. [第二回コントラクト輪読会レポート〜ERC721のコントラクトを皆で読みながら理解を深めよう〜](https://ethereumnavi.com/2021/11/09/contract-study-2-solidity-erc721/#fn-safemint)
