@@ -220,6 +220,7 @@ contract MyNFT is ERC721 {
      */
     function superTransferFrom(address _to, uint _id) public {
         // transferFrom 呼び出す 
+        transferFrom(msg.sender, _to, _id); 
     }
 
     /**

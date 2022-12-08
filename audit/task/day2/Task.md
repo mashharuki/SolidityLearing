@@ -13,21 +13,25 @@
    - _safemint
    - _checkOnERC721Received
 
-1. ERC20とERC721のtransferの違いはなんでしょうか？
+2. ERC20とERC721のtransferの違いはなんでしょうか？
 
 ERC20のtransferでは、トークンの残高のみの増減を操作するのに対して、ERC721ではowner addressとトークンIDの紐付けを操作する。
 
-1. なぜその違いが起こるのでしょうか？
+3. なぜその違いが起こるのでしょうか？
 
-1. OpenZeppelin#ERC721の `_checkOnERC721Received` はどこで使われているでしょうか？
+NFTの場合は、どのアドレスがどのIDのトークンを所有しているかという情報を管理することが重要だから
+
+4. OpenZeppelin#ERC721の `_checkOnERC721Received` はどこで使われているでしょうか？
     - Source  
         [openzeppelin-contracts/ERC721.sol at master · OpenZeppelin/openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol)
         
     - _safeTransfer
     - _safeMint
 
-1. なぜNFTを送信する`superSafeTransferFrom` は失敗したのでしょうか？
+5. なぜNFTを送信する`superSafeTransferFrom` は失敗したのでしょうか？
 
+- If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+- GiveMeNFTは何も継承していないから
 
-1. `_checkOnERC721Receive` を使用する目的はなんでしょうか？
+6. `_checkOnERC721Receive` を使用する目的はなんでしょうか？
 誤ってEOA以外のアドレスに(コントラクトのアドレス)に送信してしまわないようにうするため。
