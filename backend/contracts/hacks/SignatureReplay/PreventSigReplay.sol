@@ -39,6 +39,7 @@ contract MultiSigWallet {
         uint _amount,
         uint _nonce
     ) public view returns (bytes32) {
+        // 署名データの使い回しを防ぐために、コントラクト自身のアドレスとナンスを加える。
         return keccak256(abi.encodePacked(address(this), _to, _amount, _nonce));
     }
 
