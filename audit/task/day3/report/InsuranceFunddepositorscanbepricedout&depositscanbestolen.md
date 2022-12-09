@@ -14,7 +14,7 @@ The deposit / withdraw functions also use the VUSD contract balance for the shar
 
 It's possible to increase the share price to very high amounts and price out smaller depositors.
 
-InsuranceFund.deposit関数は、預け入れ額と同じ額の初期トークンをミントします。
+`InsuranceFund.deposit`関数は、預け入れ額と同じ額の初期トークンをミントします。
 入金/出金関数は、トークン価格の計算にVUSDコントラクトの残高を使用します。  
 (balance() = vusd.balanceOf(address(this)))  
 
@@ -39,3 +39,6 @@ The same mitigation can be done here.
 
 UniswapV2がこれを防ぐ方法は、最低入金額を要求し、ゼロアドレスに1000トークンの初期トークンを送ることで、この攻撃に対するハードルを高くすることです。
 ここでも同じような緩和が可能です。(uniswapVwPair.solの_mintのところ！！！)
+
+## バグの原因
+ゼロアドレスに初期トークンをミントしていないこと。

@@ -72,6 +72,4 @@ The attacker could perform price manipulation to make the apparent value of an a
 Avoid using `previewRedeem` function to calculate the price of the LP token of an ERC4626 vault. Consider implementing TWAP so that the price cannot be inflated or deflated within a single block/transaction or within a short period of time.
 
 ERC4626準拠のLPトークンの価格計算に`previewRedeem` 関数を利用することを避けること。  
-1ブロック/トランザクション内や短時間での価格の膨張・収縮ができないようなTWAPの実装を検討する。
-
-⇨ TWAPとは？？
+1ブロック/トランザクション内や短時間での価格の膨張・収縮ができないような時間加重平均価格の算出ロジックの実装を検討する。
