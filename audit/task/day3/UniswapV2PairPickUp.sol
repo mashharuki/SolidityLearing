@@ -1,4 +1,3 @@
-
 /**
  * UniswapV2Pairコントラクト
  * IUniswapV2Pair, UniswapV2ERC20を継承している。
@@ -25,13 +24,16 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
 
     /**
      * getReservesメソッド    
+     * @return _reserve0
+     * @return _reserve1
+     * @return _blockTimestampLast
      */
     function getReserves() public view returns (uint112 _reserve0, uint112 _reserve1, uint32 _blockTimestampLast) {
-        // 引数 _reserve0を代入する
+        // 引数 _reserve0に値を代入する
         _reserve0 = reserve0;
-        // 引数 _reserve1を代入する
+        // 引数 _reserve1に値を代入する
         _reserve1 = reserve1;
-        // 引数 _blockTimestampLastを代入する
+        // 引数 _blockTimestampLastに値を代入する
         _blockTimestampLast = blockTimestampLast;
     }
 
@@ -42,24 +44,25 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
     function _update(uint balance0, uint balance1, uint112 _reserve0, uint112 _reserve1) private {
         // 引数として渡されたbalance0とbalance1の値がoverflowしないかチェックする。
         require(balance0 <= uint112(-1) && balance1 <= uint112(-1), 'UniswapV2: OVERFLOW');
-        // ブロックタイムスタンプを2で割り、その値を32回掛け算した値を代入する。
+        // ブロックタイムスタンプを2で割り、その値を32を掛け算した値を代入する。
         uint32 blockTimestamp = uint32(block.timestamp % 2**32);
-        // どのくらい時間が経過したのか算出する。(overflowを防ぐ)
+        // 時間加重量を算出する。
         uint32 timeElapsed = blockTimestamp - blockTimestampLast;
 
         // 前回更新されてから未来であること、およびリザーブの値が0ではない場合に中身の処理を実行する。
         if (timeElapsed > 0 && _reserve0 != 0 && _reserve1 != 0) {
             // * never overflows, and + overflow is desired
-            // 不明・・。
+            // overflowしないため時間加重平均価格を算出する。
             price0CumulativeLast += uint(UQ112x112.encode(_reserve1).uqdiv(_reserve0)) * timeElapsed;
             price1CumulativeLast += uint(UQ112x112.encode(_reserve0).uqdiv(_reserve1)) * timeElapsed;
         }
-        // 引数balance0をuint112にリキャストしてreserve0にセットする。
+        // 引数balance0をuint112にリキャストしてreserve0にセットする。(更新)
         reserve0 = uint112(balance0);
-        // 引数balance1をuint112にリキャストしてreserve1にセットする。
+        // 引数balance1をuint112にリキャストしてreserve1にセットする。(更新)
         reserve1 = uint112(balance1);
         // blockTimestampLastの値を更新する。
         blockTimestampLast = blockTimestamp;
+        // イベントの発行
         emit Sync(reserve0, reserve1);
     }
 
@@ -101,7 +104,7 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
         _mint(to, liquidity);
         // _update関数を呼び出してリザーブなどの情報を更新する。
         _update(balance0, balance1, _reserve0, _reserve1);
-        // もし feeOnがtrueであれば、kLastの値を更新する。
+        // もし feeOnがtrueであれば、kの値を最新化する。
         if (feeOn) kLast = uint(reserve0).mul(reserve1); 
         // イベント発行
         emit Mint(msg.sender, amount0, amount1);
@@ -150,7 +153,7 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
         balance1 = IERC20(_token1).balanceOf(address(this));
         // リザーブなどの情報を更新する。
         _update(balance0, balance1, _reserve0, _reserve1);
-        // もし feeOnがtrueであれば、kLastの値を更新する。
+        // もし feeOnがtrueであれば、kの値を最新化する。
         if (feeOn) kLast = uint(reserve0).mul(reserve1); 
         // イベント発行
         emit Burn(msg.sender, amount0, amount1, to);
@@ -199,10 +202,11 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
         require(amount0In > 0 || amount1In > 0, 'UniswapV2: INSUFFICIENT_INPUT_AMOUNT');
 
         { // scope for reserve{0,1}Adjusted, avoids stack too deep errors
-            // 残高調整量を算出する(不明)
+            // スワップ後の値を算出する(手数料3%込み)
             uint balance0Adjusted = balance0.mul(1000).sub(amount0In.mul(3));
             uint balance1Adjusted = balance1.mul(1000).sub(amount1In.mul(3));
             // 想定の範囲内かをチェックする(不明)
+            // ※ 超重要 スワップした後Kの値がスワップ前Kの値よりも大きいことを確認する。
             require(balance0Adjusted.mul(balance1Adjusted) >= uint(_reserve0).mul(_reserve1).mul(1000**2), 'UniswapV2: K');
         }
 

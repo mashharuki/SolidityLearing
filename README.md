@@ -190,6 +190,10 @@ transferFrom(0x0123456789abcdef01223456789abcdef0123456, 0xabcdef0123456789abcde
 連結する  -->  0x0000000000000000000000000123456789abcdef01223456789abcdef0123456000000000000000000000000abcdef0123456789abcdef0123456789abcdef01000000000000000000000000000000000000000000000000000000000000001d
 ```
 
+### スリッページとは
+
+スリッページとは、お客様の注文レートと実際に約定したレートの差のこと。
+
 ### 参考文献
 1. [Solidity by Example](https://solidity-by-example.org/)
 2. [Smart Contract Engineer](https://www.smartcontract.engineer/)

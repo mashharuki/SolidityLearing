@@ -27,6 +27,22 @@
 11. Upgradable Contractの仕組みを絵にしよう！
 12. MasterChef どのような目的で使用されるのか？
 
+### example 1USDC = 150 JPYC
+
+X: (JPYC) 15000 → 14285 (15000 - 14285 = 715) 715 / 5 = 143  
+
+Y: (USDC) 100 → 105  
+
+K = XY = 1510^5  
+  
+5 USDCを交換したい!!!  
+
+Kをずっと一定にしたい!!!!  
+
+y = k * 1/x  
+
+y = 15*10^5 / 105 = 14285  
+
 ### 参考資料
 1. [レポートの例](https://code4rena.com/reports/2022-03-sublime/)
 2. [レポートの例2](https://hackmd.io/@Tomo0930/SkCXCHvvj)
