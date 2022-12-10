@@ -1,9 +1,3 @@
-# Day5 Task Report
-
-### 作成者
-
-mashharuki
-
 ## [H-1] タイトル
 
 ### ■ カテゴリー
