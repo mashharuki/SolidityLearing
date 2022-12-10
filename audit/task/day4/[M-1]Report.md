@@ -2,7 +2,7 @@
 
 ### ■ カテゴリー
 
-Dos
+DoS
 
 ### ■ 条件
 
@@ -28,7 +28,7 @@ Dos
 その上で`redeem`という`external`修飾子をつけたメソッドを作成し、その中で`transfer`を実行すること。
 
 ```sol
-mapping(uint => address) publice loanOwners;
+mapping(uint => address) public loanOwners;
 ```
 
 ```sol

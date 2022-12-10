@@ -27,7 +27,7 @@ function closeLoan(uint256 loanId, address sendCollateralTo) external override n
 
 ### ■ 修正方法
 
-`transfrom`メソッドではなく、`safeTransferFrom`メソッドを使用するように修正する。
+`transferFrom`メソッドではなく、`safeTransferFrom`メソッドを使用するように修正する。
 
 ```sol
 function closeLoan(uint256 loanId, address sendCollateralTo) external override notClosed(loanId) {

@@ -26,8 +26,8 @@ Reentrancy
 ### ■ 修正方法
 
 - リエントランシー攻撃を防ぐために、`ReentrancyGuard.sol`で定義されているような、修飾子を`lend()`メソッドにも適用すること。
-- requrire文を使って、貸し手と借り手が同じアカウントでないことをチェックする一文を入れる
-- lendTicektを移転するロジックを元の貸し手に資金を移転する前に挟み込む
+- require文を使って、貸し手と借り手が同じアカウントでないことをチェックする一文を入れる
+- lendTicketを移転するロジックを元の貸し手に資金を移転する前に挟み込む
 
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol
 

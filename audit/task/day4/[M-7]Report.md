@@ -1,8 +1,8 @@
-## [M-7] mintBorrowTicketToはonERC721Receivedメソッドを持たない契約である可能性があり、これによりBorrowTicket NFTが凍結され、ユーザーの資金が危険にさらされる可能性があります。
+## [M-7] mintBorrowTicketToはonERC721Receivedメソッドを持たないコントラクトである可能性があり、これによりBorrowTicket NFTが凍結され、ユーザーの資金が危険にさらされる可能性があります。
 
 ### ■ カテゴリー
 
-ミドルリスク
+ERC721
 
 ### ■ 条件
 
@@ -16,7 +16,7 @@ function mint(address to, uint256 tokenId) external override loanFacilitatorOnly
 }
 ```
 
-NFTLoanFacilitator.solの102行目あたりで_mintメソッドを呼んでいるが、ここでtoのアドレスがIERC721に対応していないと適切ではないアドレスにNFTをミントしてしまうことになる。(凍結状態となる。)
+`NFTLoanFacilitator.sol`の102行目あたりで`_mint`メソッドを呼んでいるが、ここでtoのアドレスがIERC721に対応していないと適切ではないアドレスにNFTをミントしてしまうことになる。(凍結状態となる。)
 
 ### ■ 修正方法
 
