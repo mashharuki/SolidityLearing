@@ -1,8 +1,8 @@
-## [H-3] 借り手が自分自身の貸し手となり、リエントランシー攻撃によりバイアウトから資金を盗むことができる脆弱性
+## [H-3] 借り手が自分自身の貸し手となり、リエントランシー攻撃によりbuyoutから資金を盗むことができる脆弱性
 
 ### ■ カテゴリー
 
-ハイリスク
+Reentrancy
 
 ### ■ 条件
 
@@ -25,6 +25,12 @@
 
 ### ■ 修正方法
 
-- リエントランシー攻撃を防ぐために、ReentrancyGuard.solで定義されているような、修飾子をlend()メソッドにも適用すること。
+- リエントランシー攻撃を防ぐために、`ReentrancyGuard.sol`で定義されているような、修飾子を`lend()`メソッドにも適用すること。
 - requrire文を使って、貸し手と借り手が同じアカウントでないことをチェックする一文を入れる
 - lendTicektを移転するロジックを元の貸し手に資金を移転する前に挟み込む
+
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol
+
+```sol
+require(msg.sender != currentLoanOwner, "msg.sender must be not currentLoanOwner address!")
+```
