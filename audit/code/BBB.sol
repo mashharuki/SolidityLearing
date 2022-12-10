@@ -10,6 +10,7 @@ contract BBB {
   uint constant REWARD_RATE = 50;
   // 関数のaddressは適当です
   address constant BBBToken = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+  // ここ要チェック
   address owner = msg.sender;
   address[] approvedTokens; /// JPYC, USDC, USDTのみがownerからapproveされます
   address[] whitelist;
@@ -39,7 +40,7 @@ contract BBB {
   /// @notice  approvedTokens配列にtokenを使いするために使用します
   /// @dev     ownerだけが実行できます
   function addApprovedTokens(address _token) private {
-    // ここ怪しそう・・　ownerのアドレスを設定しなくて良い？？
+    // ここ怪しそう・・　ownerのアドレスを設定しなくて良い？？ modifyerとか使った方が良さそう owner書き換えられそう・・・。
     if (msg.sender != owner) revert();
     approvedTokens.push(_token);
   }
@@ -54,7 +55,7 @@ contract BBB {
   function getReward(address token) public view returns (uint reward) {
     uint amount = depositAmt[msg.sender][token].amount;
     uint lastTime = depositAmt[msg.sender][token].lastTime;
-    // ここ怪しそう・・。
+    // ここ怪しそう・・。 block.timestampを使ってはだめで時間加重平均で算出した方が良い？？
     reward = (REWARD_RATE / (block.timestamp - lastTime)) * amount;
   }
 
@@ -77,11 +78,17 @@ contract BBB {
    *********************************   PUBLIC FUNCTIONS     ************************************
    *********************************************************************************************/
 
+  /**
+   * owner以外が追加できてしまうので任意の草コインも登録できてしまうのではないか？？？
+   */
   function addWhitelist(address _token) public {
     if (!_isXXX(_token, approvedTokens)) revert();
     whitelist.push(_token);
   }
 
+  /**
+   * 
+   */
   function deposit(uint _amount, address _token, bool _isETH) public {
     if (!_isXXX(_token, whitelist)) revert();
     DepostInfo memory depositInfo;
@@ -95,11 +102,13 @@ contract BBB {
     });
 
     _tokenTransfer(info);
+    // ここ怪しそう・・。
     depositInfo.lastTime = uint40(block.timestamp);
     depositInfo.amount = _amount;
     depositAmt[msg.sender][_token] = depositInfo;
   }
 
+  // 誰でもwithdrawできて良いのか？？ 何かしらで制限する必要ありそう・・！
   function withdraw(
     address _to,
     uint _amount,
@@ -124,6 +133,7 @@ contract BBB {
     uint rewardAmount = getReward(_token);
     
     IERC20(BBBToken).transfer(msg.sender, rewardAmount);
+    // 最後に情報などを更新しなくても良いか？
   }
 
   /*********************************************************************************************
