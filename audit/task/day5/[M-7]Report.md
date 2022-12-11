@@ -1,4 +1,4 @@
-## [M-7] 攻撃者が(cryptopunkのような)erc721をサポートしないnft上でショートプットオプションオーダーを作成でき、ユーザーはそのオーダーを満たすことができるが、オプションをexerciseすることができない脆弱性
+## [M-7] 攻撃者が(cryptopunkのような)ERC721に準拠していないNFTでshortプットオプションオーダーを作成でき、ユーザーはそのオーダーを満たすことができるが、オプションをexerciseすることができない脆弱性
 
 ### ■ カテゴリー
 
@@ -28,4 +28,4 @@ ERC721(floorTokens[i]).safeTransferFrom(from, address(this), floorTokenIds[i]);
 
 ### ■ 修正方法
 
-`baseAsset`に設定できるNFTをホワイトリスト化すること。
+`baseAsset`に設定できるNFTについては、ERC721に準拠したトークンアドレスのみを使用できるようにホワイトリスト化して管理すること。

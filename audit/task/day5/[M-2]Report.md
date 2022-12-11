@@ -1,4 +1,4 @@
-## [M-２] 無制限ループにより、exercise()とdrawal()を失敗させる可能性がある脆弱性
+## [M-２] 無制限ループにより、exercise()とdrawal()のメソッドの実行が失敗しDoSが発生する可能性がある脆弱性
 
 ### ■ カテゴリー
 
@@ -6,7 +6,7 @@ DoS
 
 ### ■ 条件
 
-`assets.length`と`floorTokens.length`の数がとても大きな場合
+`assets.length`と`floorTokens.length`の数がとても大きい場合
 
 ### ■ ハッキングの詳細
 
@@ -38,4 +38,23 @@ function _transferFloorsOut(address[] memory floorTokens, uint256[] memory floor
 
 ### ■ 修正方法
 
-`assets.length`と`floorTokens.length`に設定できる上限値を設置すること。また、その上限値を超えていないかチェックするロジックを入れること。
+`assets.length`と`floorTokens.length`に設定できる上限値を設置すること。また、その上限値を超えていないかチェックするロジックを入れること。  
+
+まず、上限値として定数を定義する。
+
+```sol
+const UPPER_TOKENS =  50;
+```
+
+そしてコントラクト内でチェックするロジックを加える。
+
+```sol
+function _transferFloorsOut(address[] memory floorTokens, uint256[] memory floorTokenIds) internal {
+    // ここにチェックするロジックを加える
+    require(floorTokens.length <= UPPER_TOKENS, "floorTokens.length is too much!")
+
+    for (uint256 i = 0; i < floorTokens.length; i++) {
+        ERC721(floorTokens[i]).safeTransferFrom(address(this), msg.sender, floorTokenIds[i]);
+    }
+}
+```

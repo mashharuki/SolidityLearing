@@ -1,8 +1,8 @@
-## [H-2] acceptcounteroffer()は両方の注文が満たされる結果になることがある脆弱性
+## [H-2] acceptcounteroffer()を実行したことにより、2つのorderが満たされる可能性がある脆弱性
 
 ### ■ カテゴリー
 
-FrontRunning
+タイミング
 
 ### ■ 条件
 
@@ -10,9 +10,9 @@ FrontRunning
 
 ### ■ ハッキングの詳細
 
-ユーザがカウンターオファーを受け入れようとする場合、acceptCounterOffer() 関数を、キャンセルされる originalOrder と、満たされるべき新しい order の両方とともに呼び出します。攻撃者(または同時にfillOrder()を呼び出した他のユーザ)は、acceptCounterOffer()がキャンセルする前にoriginalOrderを埋めることが可能です。
+ユーザがカウンターオファーを受け入れようとする場合、`acceptCounterOffer()` 関数を、キャンセルされる `originalOrder` と、満たされるべき新しい `order` の両方とともに呼び出します。攻撃者(または同時に`fillOrder()`を呼び出した他のユーザ)は、`acceptCounterOffer()`がキャンセルする前にoriginalOrderを埋めることが可能です。
 
-その結果、originalOrder と order の両方が満たされることになります。acceptCounterOffer() の msg.sender は、必要なトークン転送が成功すると、意図したよりも 2 倍活用されます。
+その結果、originalOrder と order の両方が満たされることになります。`acceptCounterOffer()` の `msg.sender` は、必要なトークン転送が成功すると、意図した結果に加えてさらにもう一回実行します。
 
 ```sol
    function acceptCounterOffer(
@@ -43,5 +43,32 @@ FrontRunning
 すでに`order`が失敗している時は、`cancel()`メソッドが失敗するような条件を加えること
 
 ```sol
-equire(_ownerOf[uint256(orderHash)] == 0)
+require(_ownerOf[uint256(orderHash)] == 0)
+```
+
+#### 修正前のコード
+
+```sol
+    function cancel(Order memory order) public {
+        require(msg.sender == order.maker, "Not your order");
+        bytes32 orderHash = hashOrder(order);
+        // mark the order as cancelled
+        cancelledOrders[orderHash] = true;
+        emit CancelledOrder(orderHash, order);
+    }
+```
+
+#### 修正後のコード
+
+```sol
+    function cancel(Order memory order) public {
+        require(msg.sender == order.maker, "Not your order");
+        bytes32 orderHash = hashOrder(order);
+
+        require(_ownerOf[uint256(orderHash)] == 0)
+        
+        // mark the order as cancelled
+        cancelledOrders[orderHash] = true;
+        emit CancelledOrder(orderHash, order);
+    }
 ```

@@ -1,4 +1,4 @@
-## [M-8] erc721.transferfrom() と erc20.transferfrom() の間の重複は、order.erc20assets または order.baseasset が erc20 でなく erc721 になることを可能にする脆弱性。
+## [M-8] order.erc20assets または order.baseasset が erc20 でなく erc721 になる可能がある脆弱性。
 
 ### ■ カテゴリー
 
@@ -27,4 +27,4 @@ ERC20(token).safeTransferFrom(from, address(this), tokenAmount);
 
 ### ■ 修正方法
 
-承認したERC721とERC20のトークンアドレス情報をホワイトリスト化する。またそのホワイトリストを分けて管理すること。
+PuttyV2コントラクト内で使用するERC721とERC20のトークンアドレス情報をホワイトリスト化して管理する。またそのホワイトリストをERC20用とERC721用に分けて管理すること。

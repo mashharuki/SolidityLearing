@@ -6,7 +6,7 @@ ERC20
 
 ### ■ 条件
 
-order.strikeとfeeがかなり小さい値にセットされている場合
+`fee`がかなり小さい値にセットされている場合
 
 ### ■ ハッキングの詳細
 
@@ -20,6 +20,19 @@ ERC20(order.baseAsset).safeTransfer(owner(), feeAmount);
 ### ■ 修正方法
 
 総金額が0より大きいことをチェックするロジックを加えること
+
+#### 修正前のコード
+
+```sol
+// send the fee to the admin/DAO if fee is greater than 0%
+uint256 feeAmount = 0;
+if (fee > 0) {
+    feeAmount = (order.strike * fee) / 1000;
+    ERC20(order.baseAsset).safeTransfer(owner(), feeAmount);
+}
+```
+
+#### 修正後のコード
 
 ```sol
 // send the fee to the admin/DAO if fee is greater than 0%

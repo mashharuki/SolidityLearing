@@ -229,3 +229,4 @@ transferFrom(0x0123456789abcdef01223456789abcdef0123456, 0xabcdef0123456789abcde
 32. [Uniswap v2-core](https://github.com/Uniswap/v2-core)
 33. [DefiLlama](https://defillama.com/)
 34. [backed protocol](https://github.com/code-423n4/2022-04-backed)
+35. [PuttyV2 protocol](https://github.com/code-423n4/2022-06-putty)

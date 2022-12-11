@@ -1,4 +1,4 @@
-## [H-4] ゼロストライクコールオプションは、買い手からプレミアムを奪うためにシステム的に使用できる脆弱性
+## [H-4] 0 strike call オプションは、買い手からプレミアムを奪うのに使用できてしまう脆弱性
 
 ### ■ カテゴリー
 
@@ -10,8 +10,8 @@ Weird ERC20 Tokens
 
 ### ■ ハッキングの詳細
 
-現在、システムは権利行使価格を確認せず、無条件に`safeTransferFrom`を実行しようとしている。  
-Weird ERC20 Tokensでは送金額を0に設定して`transfer`することはできないので、`reverts`が発生する。
+現在、このPuttyV2コントラクトでは権利行使価格を確認せず、無条件に`safeTransferFrom`を実行しようとしています。 
+しかし、`Weird ERC20 Tokens`に準拠しているトークンでは送金額を0に設定して`transfer`することはできないので、`reverts`が発生します。
 
 ```sol
     function exercise(Order memory order, uint256[] calldata floorAssetTokenIds) public payable {
@@ -40,6 +40,16 @@ Weird ERC20 Tokensでは送金額を0に設定して`transfer`することはで
 ### ■ 修正方法
 
 送金するトークンの量が0より大きいことを確認するロジックを追記すること。
+
+#### 修正前のコード
+
+```sol
+    } else {
+        ERC20(order.baseAsset).safeTransferFrom(msg.sender, address(this), order.strike);
+    }
+```
+
+#### 修正後のコード
 
 ```sol
     } else {
