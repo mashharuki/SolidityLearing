@@ -38,7 +38,7 @@ contract BBB {
    *********************************************************************************************/
 
   /// @notice  approvedTokens配列にtokenを使いするために使用します
-  /// @dev     ownerだけが実行できます
+  /// @dev     ownerだけが実行できます。 ← privateにしているので外部から呼び出せない？？ 登録できないのではないか？？どうやって呼び出して追加する??
   function addApprovedTokens(address _token) private {
     // ここ怪しそう・・　ownerのアドレスを設定しなくて良い？？ modifyerとか使った方が良さそう owner書き換えられそう・・・。
     if (msg.sender != owner) revert();
@@ -49,9 +49,9 @@ contract BBB {
    *******************************   VIEW | PURE FUNCTIONS     *********************************
    *********************************************************************************************/
 
-  /// @notice  
+  /// @notice  Rewardを獲得するためのメソッド (引数に設定されているアドレスがホワイトリストに登録ずみのアドレスであること確認する必要があるかも)
   /// @dev     Can call only owner
-  /// @return 
+  /// @return  reward
   function getReward(address token) public view returns (uint reward) {
     uint amount = depositAmt[msg.sender][token].amount;
     uint lastTime = depositAmt[msg.sender][token].lastTime;
@@ -131,7 +131,7 @@ contract BBB {
     canWithdrawAmount = 0;
     _tokenTransfer(info);
     uint rewardAmount = getReward(_token);
-    
+    // ここsafeTransferFromじゃなくて良い？？
     IERC20(BBBToken).transfer(msg.sender, rewardAmount);
     // 最後に情報などを更新しなくても良いか？
   }
@@ -144,6 +144,7 @@ contract BBB {
       (bool success, ) = _info.to.call{ value: _info.amount }("");
       require(success, "Failed");
     } else {
+      // ここsafeTransferFromじゃなくて良い？？
       IERC20(_info.token).transferFrom(_info.from, _info.to, _info.amount);
     }
   }
