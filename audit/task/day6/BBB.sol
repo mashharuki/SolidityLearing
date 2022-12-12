@@ -40,8 +40,8 @@ contract BBB {
   /// @notice  approvedTokens配列にtokenを使いするために使用します
   /// @dev     ownerだけが実行できます。 ← privateにしているので外部から呼び出せない？？ 登録できないのではないか？？どうやって呼び出して追加する??
   function addApprovedTokens(address _token) private {
-    // ここ怪しそう・・　ownerのアドレスを設定しなくて良い？？ modifyerとか使った方が良さそう owner書き換えられそう・・・。
     if (msg.sender != owner) revert();
+    // @audit JPYC, USDC, USDTのいずれかのアドレスであるかを確認するロジックはいらない？？
     approvedTokens.push(_token);
   }
 
@@ -108,7 +108,8 @@ contract BBB {
     depositAmt[msg.sender][_token] = depositInfo;
   }
 
-  // 誰でもwithdrawできて良いのか？？ 何かしらで制限する必要ありそう・・！
+  // 誰でもwithdrawできて良いのか？？ 何かしらで制限する必要ありそう・・！ mapping変数などで管理する必要あり！
+  // @audit 
   function withdraw(
     address _to,
     uint _amount,
@@ -131,7 +132,7 @@ contract BBB {
     canWithdrawAmount = 0;
     _tokenTransfer(info);
     uint rewardAmount = getReward(_token);
-    // ここsafeTransferFromじゃなくて良い？？
+    // @audit ここsafeTransferFromじゃなくて良い？？
     IERC20(BBBToken).transfer(msg.sender, rewardAmount);
     // 最後に情報などを更新しなくても良いか？
   }
@@ -144,12 +145,15 @@ contract BBB {
       (bool success, ) = _info.to.call{ value: _info.amount }("");
       require(success, "Failed");
     } else {
-      // ここsafeTransferFromじゃなくて良い？？
+      // @audit ここsafeTransferFromじゃなくて良い？？
       IERC20(_info.token).transferFrom(_info.from, _info.to, _info.amount);
     }
   }
 }
 
+/**
+ * インターフェースは、悪さはしていない。
+ */
 interface IERC20 {
   function totalSupply() external view returns (uint);
 
