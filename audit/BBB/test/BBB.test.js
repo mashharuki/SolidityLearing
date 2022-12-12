@@ -49,13 +49,15 @@ describe('BBB', function () {
             );
         });
 
-        it("【error pattern】get reward", async function () {
+        it("get reward", async function () {
             // コントラクトをデプロイする。
             const { bbb } = await loadFixture(deployContract);
-            // add token
-            await truffleAssert.reverts(
-                bbb.getReward(BBBToken)
-            );
+            // deposit
+            await bbb.deposit(10, BBBToken, false); 
+            // get reward
+            var reward = await bbb.getReward(BBBToken);
+            // check
+            console.log("reward", reward);
         });
     });
 });
