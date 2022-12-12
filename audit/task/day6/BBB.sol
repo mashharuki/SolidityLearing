@@ -51,7 +51,7 @@ contract BBB {
 
   /// @notice  Rewardを獲得するためのメソッド (引数に設定されているアドレスがホワイトリストに登録ずみのアドレスであること確認する必要があるかも)
   /// @dev     Can call only owner
-  /// @return  reward
+  /// @return  reward 
   function getReward(address token) public view returns (uint reward) {
     uint amount = depositAmt[msg.sender][token].amount;
     uint lastTime = depositAmt[msg.sender][token].lastTime;
