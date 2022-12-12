@@ -79,7 +79,7 @@ contract BBB {
    *********************************************************************************************/
 
   /**
-   * owner以外が追加できてしまうので任意の草コインも登録できてしまうのではないか？？？
+   * owner以外が追加できてしまうので任意の草コインも登録できてしまうのではないか？？？　→ approvedTokensで管理しているのでそんなことなし！
    */
   function addWhitelist(address _token) public {
     if (!_isXXX(_token, approvedTokens)) revert();
