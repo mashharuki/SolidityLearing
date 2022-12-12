@@ -2,7 +2,7 @@
 
 ### ■ カテゴリー
 
-Time
+Insuffisient check
 
 ### ■ 条件
 
