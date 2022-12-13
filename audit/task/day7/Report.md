@@ -1,15 +1,18 @@
-# Day7 Task Report
+# [F-Team] Day7 Task Report
 
 ### 作成者
 
-mashharuki
+mugi, Kyok, masaru, mashharuki
 
-## [H-1] タイトル
+## [FTeam-H1] 要約
 
-### ■ カテゴリー
+## バグの詳細
 
-### ■ 条件
+## インパクト
 
-### ■ ハッキングの詳細
+## 対象となるコード
 
-### ■ 修正方法
+## 使用したツール
+特になし
+
+## 改善方法
