@@ -2,9 +2,9 @@
 pragma solidity =0.8.17;
 
 /**
- * BBB コントラクト
+ * SafeBBB コントラクト
  */
-contract BBB {
+contract SafeBBB {
 
   /*********************************************************************************************
    ************************************   VARIABLES     ****************************************
@@ -20,6 +20,12 @@ contract BBB {
   address[] approvedTokens; 
   // ホワイトリストに設定されたトークンアドレスを格納する変数(怪しそう・・。)
   address[] whitelist;
+  // JPYC, USDC, USDTのアドレスを格納した配列
+  address[] tokens = [
+    0x5b38Da6a701C568545DCfCB03FcB875F56bEdDc2,
+    0x5B38da6A701C568545dCFCb03fCB875f56BeDDc3,
+    0x5B38Da6a701C568545DcFCb03fcb875F56BEDDc5
+  ];
   // 各アドレスのdepositAmtを保有するmapping変数
   mapping(address => mapping(address => DepostInfo)) depositAmt;
 
@@ -48,10 +54,9 @@ contract BBB {
   /// @dev     ownerだけが実行できます。 ownerが悪意あるコードを登録する可能性もある コンストラクターがなくownerが変更される可能性あるかも
   function addApprovedTokens(address _token) private {
     if (msg.sender != owner) revert();
-    // @audit JPYC, USDC, USDTのいずれかのアドレスであるかを確認するロジックはいらないのか？？
-    // @audit ownerアドレスを無限に登録できてしまうので、上限値を設ける必要があるのではないか？
-    // @audit このaddApprovedTokensって他にどこから呼び出す??
-    // @audit removeが必要では？
+    // ここに確認するロジックを加える。
+    if (!_isXXX(_token, tokens)) revert();
+
     approvedTokens.push(_token);
   }
 
