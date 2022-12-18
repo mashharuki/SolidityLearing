@@ -234,4 +234,6 @@ transferFrom(0x0123456789abcdef01223456789abcdef0123456, 0xabcdef0123456789abcde
 37. [Caviar contest](https://code4rena.com/contests/2022-12-caviar-contest)
 38. [【Solidity】mapping key が存在しない場合を判定する](https://daiki-sekiguchi.com/2018/08/11/ethereum-solidity-mapping-key-not-exists/)
 39. [Solidity Assembly入門 ~ 配列について storage/memory ~](https://y-nakajo.hatenablog.com/entry/2018/07/12/140223)
-
+40. [Caviar Demo](https://goerli.caviar.sh/)
+41. [Solidity開発ツール、Foundryの紹介](https://tech.fracton.ventures/entry/2022/08/23/135902)
+42. [AMM型NFTマーケットプレイスの仕組みとは](https://coinpost.jp/?p=408914)
